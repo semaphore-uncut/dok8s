@@ -21,7 +21,7 @@ blocks:
           - kubectl get nodes
           - kubectl get pods
           - checkout
-          - docker build . -t uncut/nginx-grape:$WORKFLOW_ID
-          - docker push uncut/nginx-grape:$WORKFLOW_ID
+          - docker build . -t uncut/nginx-grape:$SEMAPHORE_WORKFLOW_ID
+          - docker push uncut/nginx-grape:$SEMAPHORE_WORKFLOW_ID
           - envsubst < nginx.yml | tee nginx.yml
           - kubectl apply -f nginx.yml
