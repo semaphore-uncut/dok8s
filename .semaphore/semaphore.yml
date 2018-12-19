@@ -12,7 +12,7 @@ blocks:
         - name: dok8s
       env_vars:
         - name: KUBECONFIG
-          value: $HOME/.kube/uncut1-kubeconfig.yaml
+          value: /home/semaphore/.kube/uncut1-kubeconfig.yaml
       jobs:
       - name: Docker build
         commands:
