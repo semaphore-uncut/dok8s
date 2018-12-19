@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: uncut/nginx-grape
+          image: uncut/nginx-grape:$WORKFLOW_ID
       imagePullSecrets:
         - name: dockerhub
 
