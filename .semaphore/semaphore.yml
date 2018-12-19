@@ -10,11 +10,13 @@ blocks:
     task:
       secrets:
         - name: dok8s
+        - name: dockerhub
       env_vars:
         - name: KUBECONFIG
           value: /home/semaphore/.kube/uncut1-kubeconfig.yaml
       jobs:
       - name: Docker build
         commands:
+          - echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
           - kubectl get nodes
           - kubectl get pods
