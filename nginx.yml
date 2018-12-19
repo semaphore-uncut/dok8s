@@ -14,7 +14,9 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: library/nginx
+          image: uncut/nginx-grape
+      imagePullSecrets:
+        - name: dockerhub
 
 ---
 
