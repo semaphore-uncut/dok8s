@@ -1,0 +1,21 @@
+version: v1.0
+name: Deploy to DigitalOcean Kuberneres
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Deploy
+    task:
+      secrets:
+        - name: dok8s
+      env_vars:
+        - name: KUBECONFIG
+          value: /home/semaphore/.kube/uncut1-kubeconfig.yaml
+      jobs:
+      - name: k8s deploy
+        commands:
+          - checkout
+          - envsubst < nginx.yml | tee nginx.yml
+          - kubectl apply -f nginx.yml

@@ -9,19 +9,15 @@ blocks:
   - name: "Build"
     task:
       secrets:
-        - name: dok8s
         - name: dockerhub
-      env_vars:
-        - name: KUBECONFIG
-          value: /home/semaphore/.kube/uncut1-kubeconfig.yaml
       jobs:
       - name: Docker build
         commands:
           - echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
-          - kubectl get nodes
-          - kubectl get pods
           - checkout
           - docker build . -t uncut/nginx-grape:$SEMAPHORE_WORKFLOW_ID
           - docker push uncut/nginx-grape:$SEMAPHORE_WORKFLOW_ID
-          - envsubst < nginx.yml | tee nginx.yml
-          - kubectl apply -f nginx.yml
+
+promotions:
+  - name: Deploy
+    pipeline_file: deploy.yml
